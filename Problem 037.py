@@ -11,6 +11,7 @@ The number 3797 has an interesting property. Being prime itself, it is possible 
 Find the sum of the only eleven primes that are both truncatable from left to right and right to left.
 
 NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes."""
+import time
 
 def isPrime(number):
     if number < 2:
@@ -27,7 +28,8 @@ def isPrime(number):
 #could almost certainly be combined into a single function, but I'm struggling
 #to think of a way to do it that's more elegant than with a simple if-statement.
 #I will update this later to optimize for elegance, but performance-wise the code
-#runs very well.
+#runs in <10 seconds. When I revisit this I am also planning on optimizing some
+#of the prime-checking to reduce inefficiencies/redundancies. 
 
 def isPrimelr(number):
     primes_sum = 0
@@ -57,6 +59,8 @@ def isPrimerl(number):
     else:
         return False
 
+start_time = time.time()
+
 current_integer = 10
 truncated_primes_list = []
 
@@ -70,5 +74,5 @@ while len(truncated_primes_list) < 11 and current_integer <= 1000000:
     current_integer += 1
 
 print(sum(truncated_primes_list)) #Returns 748,317
-
 print(truncated_primes_list)
+print(time.time()-start_time)
