@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
 """
-Created on Thu Jul 30 21:03:15 2015
-
+Created on Tue Aug  4 18:39:32 2015
 @author: NStornetta
 """
+
 """Project Euler Problem 31 reads as follows:
 
 In England the currency is made up of pound, £, and pence, p, and there are eight coins in general circulation:
@@ -17,30 +16,15 @@ import time
 
 start = time.time()
 
-num_combinations = 0
+coin_list = [1, 2, 5, 10, 20, 50, 100, 200]
 
-for x in range(200,-1,-1):
-    for y in range(100,-1,-1):
-#        if x*1 + y*2 > 200:
-#            break
-        for z in range(40,-1,-1):
-#            if x*1 + y*2 + z*5 > 200:
-#                break
-            for t in range(20,-1,-1):
-#                if x*1 + y*2 + z*5 + t*10 > 200:
-#                    break
-                for u in range(10,-1,-1):
-#                    if x*1 + y*2 + z*5 + t*10 +u*20 > 200:
-#                        break
-                    for v in range(4,-1,-1):
-#                        if x*1 + y*2 + z*5 + t*10 + u*20 + v*50 > 200:
-#                            break
-                        for w in range(2,-1,-1):
-#                            if x*1 + y*2 + z*5 + t*10 + u*20 + v*50 + w*100 > 200:
-#                                break
-                            if x*1 + y*2 + z*5 + t*10 + u*50 + v*100 == 200:
-                                num_combinations += 1
+def count(n, m):
+    if n == 0:
+        return 1
+    elif n < 0 or m < 0:
+        return 0
+    return count(n, m-1)+count(n-coin_list[m], m)
 
-#Need to add 1 combination for the two-pound piece, which is easier to leave 
-#out of the loop
-print(num_combinations+1, "\nAnswer returned in " + str(round(time.time()-start,2)) + " seconds")
+
+print(count(200,len(coin_list)-1))
+print("Answered in " + str(time.time()-start) + " seconds")
